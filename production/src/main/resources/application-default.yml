@@ -1,0 +1,6 @@
+# 配置文件属性设值
+person:
+  orderNumber: ${random.int}
+  userName: Super.vae
+  age: 25
+  birth: 1992-12-01

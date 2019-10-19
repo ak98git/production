@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1 align="center">欢迎登录武林秘籍管理系统</h1>
+    <h2 align="center">如果想查看武林秘籍<a th:href="@{/login}">请登录</a></h2>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="注销"/>
+    </form>
+    <hr>
+
+    <h3>普通武功秘籍</h3>
+    <ul>
+        <li><a th:href="@{/level1/1}">罗汉拳</a></li>
+        <li><a th:href="@{/level1/2}">七星拳</a></li>
+        <li><a th:href="@{/level1/3}">太极拳</a></li>
+    </ul>
+
+    <h3>高级武功秘籍</h3>
+    <ul>
+        <li><a th:href="@{/level2/1}">罗汉拳</a></li>
+        <li><a th:href="@{/level2/2}">七星拳</a></li>
+        <li><a th:href="@{/level2/3}">太极拳</a></li>
+    </ul>
+
+    <h3>绝世武功秘籍</h3>
+    <ul>
+        <li><a th:href="@{/level3/1}">罗汉拳</a></li>
+        <li><a th:href="@{/level3/2}">七星拳</a></li>
+        <li><a th:href="@{/level3/3}">太极拳</a></li>
+    </ul>
+
+    <div th:text="${ok}"></div>
+    <div id="div1" class="mydiv" th:id="${hello}" th:class="${ok}">
+        这是欢迎信息！
+    </div>
+    <hr/>
+    <h4 th:text="${user}" th:each="user:${users}"></h4>
+    <hr/>
+</body>
+</html>
