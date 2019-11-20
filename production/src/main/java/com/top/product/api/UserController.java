@@ -18,43 +18,57 @@
 package com.top.product.api;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
 import java.util.Map;
 
 /**
  * Description:
- *
+ * 测试类，控制页面跳转作用
  * @author Super.vae
  * @date 2019/10/14 23:05
  */
 @Controller
 public class UserController {
 
-//    @Value("${person.userName}")
-//    private String userName;
+    private static final String PREFIX = "pages/";
 
-    @ResponseBody
-    @RequestMapping("/test/{str}")
-    public String getInfo(@PathVariable String str){
-        return "会当临绝顶，"+str;
-    }
-
-    @RequestMapping("/vae")
+    @RequestMapping("/")
     public String vae(Map<String,Object> map){
         map.put("hello","你好");
-        map.put("ok","Ojbk!");
+        map.put("ok","Hello World!");
         map.put("users", Arrays.asList("张三","李四","王五"));
         return "welcome";
     }
 
-    @GetMapping("/level1/{path}")
-    public String info(@PathVariable String path){
-        return "level1"+path;
+    /**
+     * 登录页
+     */
+    @RequestMapping("/userLogin")
+    public String doLogin(){
+        return PREFIX+"login";
+    }
+
+    /**
+     * level1页面映射
+     * @param path
+     * @return
+     */
+    @RequestMapping("/level1/{path}")
+    public String info1(@PathVariable("path") String path){
+        return PREFIX+"level1/"+path;
+    }
+
+    /**
+     * level2页面映射
+     * @param path
+     * @return
+     */
+    @RequestMapping("/level2/{path}")
+    public String info2(@PathVariable("path") String path){
+        return PREFIX+"level2/"+path;
     }
 
 }

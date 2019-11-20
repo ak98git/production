@@ -33,7 +33,10 @@ import java.util.Map;
 @RestController
 public class SysController {
 
+
+    private static final String PREFIX = "pages";
     private static final String PASS_WORD = "123456";
+
 
     @PostMapping("doLogin")
     public String doLogin(String name, String pwd,

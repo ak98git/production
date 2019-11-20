@@ -17,14 +17,11 @@
 
 package com.top.common.config;
 
-import com.top.common.listener.AuthorityInterceptor;
-import com.top.utils.MyLocaleResolver;
+import com.top.util.MyLocaleResolver;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
  * Description:
@@ -34,31 +31,32 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @date 2019/10/15 10:06
  */
 @SpringBootConfiguration
-public class MyAppConfig extends WebMvcConfigurerAdapter {
+public class MyAppConfig extends WebMvcConfigurationSupport {
 
     /**
-     * //浏览器发送什么请求到什么页面
-     * //这种配置就避免了写一个空的contrller做跳页面的方法
+     * 无效
+     * 浏览器发送什么请求到什么页面
+     * 视图跳转控制器
      * @param registry
      */
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry){
-        registry.addViewController("/").setViewName("welcome");
-    }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry){
+//        registry.addViewController("/").setViewName("welcome");
+//    }
 
     /**
-     * 添加配置的拦截器
+     * 添加拦截器
      * addPathPatterns(要拦截的页面)
      * excludePathPatterns(在过滤里剔除不过滤的页面)
      * Spring Boot已经做好了静态资源映射；不用手动处理；
      * @param registry
      */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthorityInterceptor());
-                //.addPathPatterns("/**");
-                //.excludePathPatterns("/","/welcome.html","/doLogin");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new AuthorityInterceptor());
+//                //.addPathPatterns("/**");
+//                //.excludePathPatterns("/","/welcome.html","/doLogin");
+//    }
     /**
      * 在配置类添加组件
      * @Bean注解标注在方法上

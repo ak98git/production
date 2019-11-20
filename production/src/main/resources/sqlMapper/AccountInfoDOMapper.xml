@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.top.product.userinfo.dao.AccountInfoDOMapper">
+  <resultMap id="BaseResultMap" type="com.top.product.userinfo.entity.AccountInfoDO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account_id" jdbcType="VARCHAR" property="accountId" />
+    <result column="agent_id" jdbcType="VARCHAR" property="agentId" />
+    <result column="account_type" jdbcType="TINYINT" property="accountType" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="user_mobile" jdbcType="VARCHAR" property="userMobile" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="certificate_numb" jdbcType="VARCHAR" property="certificateNumb" />
+    <result column="parent_account_id" jdbcType="VARCHAR" property="parentAccountId" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_status" jdbcType="TINYINT" property="userStatus" />
+    <result column="auth_status" jdbcType="TINYINT" property="authStatus" />
+    <result column="update_setting" jdbcType="TINYINT" property="updateSetting" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="member_route" jdbcType="TINYINT" property="memberRoute" />
+    <result column="user_level" jdbcType="INTEGER" property="userLevel" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.top.product.userinfo.entity.AccountInfoDO">
+    <result column="ancestor_account_ids" jdbcType="LONGVARCHAR" property="ancestorAccountIds" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, account_id, agent_id, account_type, nick_name, head_img, user_mobile, real_name, 
+    certificate_numb, parent_account_id, password, user_status, auth_status, update_setting, 
+    member_id, member_route, user_level, last_login_ip, last_login_time, create_time, 
+    update_time, remark
+  </sql>
+  <sql id="Blob_Column_List">
+    ancestor_account_ids
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.top.product.userinfo.entity.AccountInfoDOExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_account_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.top.product.userinfo.entity.AccountInfoDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_account_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_account_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_account_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.top.product.userinfo.entity.AccountInfoDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_account_info (account_id, agent_id, account_type, 
+      nick_name, head_img, user_mobile, 
+      real_name, certificate_numb, parent_account_id, 
+      password, user_status, auth_status, 
+      update_setting, member_id, member_route, 
+      user_level, last_login_ip, last_login_time, 
+      create_time, update_time, remark, 
+      ancestor_account_ids)
+    values (#{accountId,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, #{accountType,jdbcType=TINYINT}, 
+      #{nickName,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{certificateNumb,jdbcType=VARCHAR}, #{parentAccountId,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userStatus,jdbcType=TINYINT}, #{authStatus,jdbcType=TINYINT}, 
+      #{updateSetting,jdbcType=TINYINT}, #{memberId,jdbcType=INTEGER}, #{memberRoute,jdbcType=TINYINT}, 
+      #{userLevel,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{ancestorAccountIds,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.top.product.userinfo.entity.AccountInfoDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_account_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="headImg != null">
+        head_img,
+      </if>
+      <if test="userMobile != null">
+        user_mobile,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="certificateNumb != null">
+        certificate_numb,
+      </if>
+      <if test="parentAccountId != null">
+        parent_account_id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="authStatus != null">
+        auth_status,
+      </if>
+      <if test="updateSetting != null">
+        update_setting,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="memberRoute != null">
+        member_route,
+      </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="ancestorAccountIds != null">
+        ancestor_account_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=TINYINT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNumb != null">
+        #{certificateNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAccountId != null">
+        #{parentAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=TINYINT},
+      </if>
+      <if test="authStatus != null">
+        #{authStatus,jdbcType=TINYINT},
+      </if>
+      <if test="updateSetting != null">
+        #{updateSetting,jdbcType=TINYINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberRoute != null">
+        #{memberRoute,jdbcType=TINYINT},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ancestorAccountIds != null">
+        #{ancestorAccountIds,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.top.product.userinfo.entity.AccountInfoDOExample" resultType="java.lang.Long">
+    select count(*) from t_account_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_account_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentId != null">
+        agent_id = #{record.agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=TINYINT},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headImg != null">
+        head_img = #{record.headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null">
+        user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateNumb != null">
+        certificate_numb = #{record.certificateNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentAccountId != null">
+        parent_account_id = #{record.parentAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStatus != null">
+        user_status = #{record.userStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.authStatus != null">
+        auth_status = #{record.authStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.updateSetting != null">
+        update_setting = #{record.updateSetting,jdbcType=TINYINT},
+      </if>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberRoute != null">
+        member_route = #{record.memberRoute,jdbcType=TINYINT},
+      </if>
+      <if test="record.userLevel != null">
+        user_level = #{record.userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastLoginIp != null">
+        last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ancestorAccountIds != null">
+        ancestor_account_ids = #{record.ancestorAccountIds,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update t_account_info
+    set id = #{record.id,jdbcType=INTEGER},
+      account_id = #{record.accountId,jdbcType=VARCHAR},
+      agent_id = #{record.agentId,jdbcType=VARCHAR},
+      account_type = #{record.accountType,jdbcType=TINYINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      head_img = #{record.headImg,jdbcType=VARCHAR},
+      user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      certificate_numb = #{record.certificateNumb,jdbcType=VARCHAR},
+      parent_account_id = #{record.parentAccountId,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=TINYINT},
+      auth_status = #{record.authStatus,jdbcType=TINYINT},
+      update_setting = #{record.updateSetting,jdbcType=TINYINT},
+      member_id = #{record.memberId,jdbcType=INTEGER},
+      member_route = #{record.memberRoute,jdbcType=TINYINT},
+      user_level = #{record.userLevel,jdbcType=INTEGER},
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      ancestor_account_ids = #{record.ancestorAccountIds,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_account_info
+    set id = #{record.id,jdbcType=INTEGER},
+      account_id = #{record.accountId,jdbcType=VARCHAR},
+      agent_id = #{record.agentId,jdbcType=VARCHAR},
+      account_type = #{record.accountType,jdbcType=TINYINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      head_img = #{record.headImg,jdbcType=VARCHAR},
+      user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      certificate_numb = #{record.certificateNumb,jdbcType=VARCHAR},
+      parent_account_id = #{record.parentAccountId,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=TINYINT},
+      auth_status = #{record.authStatus,jdbcType=TINYINT},
+      update_setting = #{record.updateSetting,jdbcType=TINYINT},
+      member_id = #{record.memberId,jdbcType=INTEGER},
+      member_route = #{record.memberRoute,jdbcType=TINYINT},
+      user_level = #{record.userLevel,jdbcType=INTEGER},
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.top.product.userinfo.entity.AccountInfoDO">
+    update t_account_info
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=TINYINT},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNumb != null">
+        certificate_numb = #{certificateNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAccountId != null">
+        parent_account_id = #{parentAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=TINYINT},
+      </if>
+      <if test="authStatus != null">
+        auth_status = #{authStatus,jdbcType=TINYINT},
+      </if>
+      <if test="updateSetting != null">
+        update_setting = #{updateSetting,jdbcType=TINYINT},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberRoute != null">
+        member_route = #{memberRoute,jdbcType=TINYINT},
+      </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ancestorAccountIds != null">
+        ancestor_account_ids = #{ancestorAccountIds,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.top.product.userinfo.entity.AccountInfoDO">
+    update t_account_info
+    set account_id = #{accountId,jdbcType=VARCHAR},
+      agent_id = #{agentId,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=TINYINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      user_mobile = #{userMobile,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      certificate_numb = #{certificateNumb,jdbcType=VARCHAR},
+      parent_account_id = #{parentAccountId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=TINYINT},
+      auth_status = #{authStatus,jdbcType=TINYINT},
+      update_setting = #{updateSetting,jdbcType=TINYINT},
+      member_id = #{memberId,jdbcType=INTEGER},
+      member_route = #{memberRoute,jdbcType=TINYINT},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      ancestor_account_ids = #{ancestorAccountIds,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.top.product.userinfo.entity.AccountInfoDO">
+    update t_account_info
+    set account_id = #{accountId,jdbcType=VARCHAR},
+      agent_id = #{agentId,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=TINYINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      user_mobile = #{userMobile,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      certificate_numb = #{certificateNumb,jdbcType=VARCHAR},
+      parent_account_id = #{parentAccountId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=TINYINT},
+      auth_status = #{authStatus,jdbcType=TINYINT},
+      update_setting = #{updateSetting,jdbcType=TINYINT},
+      member_id = #{memberId,jdbcType=INTEGER},
+      member_route = #{memberRoute,jdbcType=TINYINT},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

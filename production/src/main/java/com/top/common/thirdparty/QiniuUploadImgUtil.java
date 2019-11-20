@@ -24,9 +24,13 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
-import com.top.utils.Base64;
-import com.top.utils.LogUtil;
+import com.top.util.Base64;
+import com.top.util.LogUtil;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.UUID;
 
 /**
@@ -91,5 +95,42 @@ public class QiniuUploadImgUtil {
         }
         return null;
     }
+
+
+    /**
+     * 以下代码，仅供测试使用；
+     *
+     * @param filePath
+     * @return
+     */
+    public static String readTxt(String filePath) {
+        StringBuffer buffer = new StringBuffer();
+        try {
+            File file = new File(filePath);
+            if (file.isFile() && file.exists()) {
+                InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "utf-8");
+                BufferedReader br = new BufferedReader(isr);
+                String lineTxt = null;
+                while ((lineTxt = br.readLine()) != null) {
+                    buffer.append(lineTxt);
+                }
+                br.close();
+            } else {
+                System.out.println("文件不存在!");
+            }
+        } catch (Exception e) {
+            System.out.println("文件读取错误!");
+        }
+        return buffer.toString();
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        String file64 = readTxt("D://test.txt");
+        System.err.println(file64);
+        System.err.println(uploadImageToQiniu("正面照", file64));
+    }
+
+    //访问路径为：http://px07xn7cq.bkt.clouddn.com/166686cd903e4ea69f635429db477f52.jpg
 }
 
